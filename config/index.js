@@ -11,6 +11,11 @@ module.exports = {
     url: process.env.AUTH_SERVICE_URL || "localhost",
     port: process.env.AUTH_SERVICE_PORT || 9000,
   },
+  contentService: {
+    protocol: process.env.AUTH_SERVICE_PROTOCOL || "http",
+    url: process.env.AUTH_SERVICE_URL || "localhost",
+    port: process.env.AUTH_SERVICE_PORT || 9003,
+  },
   editorsRoles,
   adminRole,
   appConfiguration: process.env.APP_CONFIGURATION || "app-configuration",

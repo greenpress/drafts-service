@@ -1,21 +1,27 @@
 const mongoose = require("mongoose");
 
 const DraftSchema = new mongoose.Schema({
-  title: {
+  userId: {
     type: String,
-    default: "Untitled Post",
+    required: true,
   },
-  contents: {
-    type: [String],
-  },
-  thumbnail: {
+  tenant: {
     type: String,
-    index: true,
+    required: true,
+  },
+  contextType: {
+    type: String,
+    enum: ["Post", "Category", "Menu", "Block", "Comment", "Configuration"],
+    required: true,
+  },
+  contextId: {
+    type: String,
+    required: false,
+  },
+  contextData: {
+    type: mongoose.Schema.Types.Mixed,
+    default: {},
   },
 });
-
-DraftSchema.statics.saveAsPost = function () {
-  // need help
-};
 
 module.exports = mongoose.model("Draft", DraftSchema);
