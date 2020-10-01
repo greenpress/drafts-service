@@ -1,4 +1,4 @@
-# Greenpress Content service
+# Greenpress Drafts service
 
 ## Main Features
 - ES6
