@@ -19,7 +19,6 @@ const DraftSchema = new mongoose.Schema<IDraft>({
   },
   contextType: {
     type: String,
-    enum: ["Post", "Category", "Menu", "Block", "Comment", "Configuration"],
     required: true,
   },
   contextId: {
