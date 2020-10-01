@@ -3,7 +3,7 @@ import mongoose, { Document } from "mongoose";
 export interface IDraft extends Document {
   user: string;
   tenant: string;
-  contectType: string;
+  contextType: string;
   contextId: string | undefined;
   contextData: any;
 }
