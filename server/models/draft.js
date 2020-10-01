@@ -14,4 +14,8 @@ const DraftSchema = new mongoose.Schema({
   },
 });
 
+DraftSchema.statics.saveAsPost = function () {
+  // need help
+};
+
 module.exports = mongoose.model("Draft", DraftSchema);
