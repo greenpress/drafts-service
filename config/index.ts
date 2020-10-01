@@ -1,3 +1,4 @@
 export const mongoUri = process.env.MONGO_URI ||
   "mongodb://localhost/draft-service";
 export const port = process.env.PORT || 9005;
+export const ip = process.env.IP || "127.0.0.1";
