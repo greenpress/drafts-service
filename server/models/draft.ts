@@ -1,7 +1,15 @@
-const mongoose = require("mongoose");
+import mongoose, { Document } from "mongoose";
 
-const DraftSchema = new mongoose.Schema({
-  userId: {
+export interface IDraft extends Document {
+  user: string;
+  tenant: string;
+  contectType: string;
+  contextId: string | undefined;
+  contextData: any;
+}
+
+const DraftSchema = new mongoose.Schema<IDraft>({
+  user: {
     type: String,
     required: true,
   },
@@ -24,4 +32,4 @@ const DraftSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Draft", DraftSchema);
+export default mongoose.model<IDraft>("Draft", DraftSchema);
