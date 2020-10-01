@@ -1,6 +1,7 @@
 # Greenpress Content service
 
 ## Main Features
+- ES6
 - manage post drafts
 
 ## Dependencies
