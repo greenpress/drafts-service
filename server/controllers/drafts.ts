@@ -40,7 +40,7 @@ export async function setDraft(req, res) {
     delete req.body.contextId;
 
     // find or create draft
-    if (!draftId) {
+    if (!draftId || draftId === "new") {
       draft = new Draft({
         contextType,
         user,
