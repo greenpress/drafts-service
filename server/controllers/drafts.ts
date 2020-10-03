@@ -33,30 +33,27 @@ export async function setDraft(req, res) {
   let draft: IDraft;
   try {
     // get data
-    const { draftId, contextType } = req.params;
+    const { draftId } = req.params;
     const { _id: user } = req.user;
     const { tenant } = req.headers;
-    const contextId = { ...req.body }.contextId;
-    delete req.body.contextId;
 
     // find or create draft
-    if (!draftId || draftId === "new") {
+    if (!draftId) {
       draft = new Draft({
-        contextType,
+        ...req.body,
         user,
         tenant,
-        contextData: req.body,
-        contextId,
       });
     } else {
-      const nullableDraft = await Draft.findOne({ draftId, contextType, user });
+      const nullableDraft = await Draft.findOne({ draftId });
       if (!nullableDraft) {
         res.status(404).json({ message: "draft not found" }).end();
         return;
       }
       draft = nullableDraft;
-      draft.contextData = req.body;
-      if (contextId) draft.contextId = contextId;
+      for (let key in req.body) {
+        draft[key] = req.body[key];
+      }
     }
 
     // save draft
