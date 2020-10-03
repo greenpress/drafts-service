@@ -31,34 +31,21 @@ export async function getDraft(req, res) {
  * the frontend doesn't care if the draft exists or not, it just passes the contextData.
 */
 export async function setDraft(req, res) {
-  let draft: IDraft;
   try {
-    // get data
-    const { draftId } = req.params;
-    const { _id: user } = req.user;
-    const { tenant } = req.headers;
+    const query = req.body._id ? { _id: req.body._id } : {};
+    const update = {
+      ...req.body,
+      user: req.user._id,
+      tenant: req.headers.tenant,
+    };
 
-    // find or create draft
-    if (!draftId) {
-      draft = new Draft({
-        ...req.body,
-        user,
-        tenant,
-      });
-    } else {
-      const nullableDraft = await Draft.findOne({ draftId });
-      if (!nullableDraft) {
-        res.status(404).json({ message: "draft not found" }).end();
-        return;
-      }
-      draft = nullableDraft;
-      for (let key in req.body) {
-        draft[key] = req.body[key];
-      }
-    }
+    const draft = await Draft.findOneAndUpdate(query, update, {
+      upsert: true,
+      useFindAndModify: true,
+      new: true,
+      setDefaultsOnInsert: true,
+    });
 
-    // save draft
-    await draft.save();
     res.status(200).json(draft).end();
   } catch (err) {
     res.status(500).json({ message: "error mutating draft" }).end();
