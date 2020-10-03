@@ -14,12 +14,6 @@ export default (app) => {
       verifyUser,
       getDraft,
     )
-    .post("/api/drafts/:contextType", populateUser, verifyUser, setDraft)
-    .put(
-      "/api/drafts/:contextType/:draftId",
-      populateUser,
-      verifyUser,
-      setDraft,
-    );
-  // you can also PUT `/api/drafts/:contextType/new` to add new drafts
+    .post("/api/drafts", populateUser, verifyUser, setDraft)
+    .put("/api/drafts/:draftId", populateUser, verifyUser, setDraft);
 };
