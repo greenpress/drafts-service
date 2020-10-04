@@ -7,7 +7,6 @@ const { populateUser, verifyUser } = require(
 export default (app) => {
   app
     .get("/api/drafts", populateUser, verifyUser, getDraftsList)
-    .get("/api/drafts/:draftId", populateUser, verifyUser, getDraft)
     .get(
       "/api/drafts/:contextType/:draftId",
       populateUser,
