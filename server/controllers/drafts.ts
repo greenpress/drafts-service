@@ -50,3 +50,18 @@ export async function setDraft(req, res) {
     res.status(500).json({ message: "error mutating draft" }).end();
   }
 }
+
+export async function deleteDraft(req, res) {
+  try {
+    const { contextType, contextId } = req.params;
+    const options = { useFindAndModify: true };
+    const deletedDraft = await Draft.findOne(
+      { contextType, contextId },
+      options,
+    );
+    deletedDraft?.remove();
+    res.status(200).json(deletedDraft).end();
+  } catch (err) {
+    res.status(500).json({ message: "couldn't delete draft" });
+  }
+}
