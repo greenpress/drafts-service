@@ -19,7 +19,6 @@ export default (app) => {
       getDraft,
     )
     .put("/api/drafts/", populateUser, verifyUser, setDraft)
-    // don't need draftId here, it's recieved from the request body
     .delete(
       "/api/drafts/:contextType/:contextId",
       populateUser,

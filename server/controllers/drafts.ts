@@ -31,11 +31,12 @@ export async function getDraft(req, res) {
 */
 export async function setDraft(req, res) {
   try {
-    const query = req.body._id ? { _id: req.body._id } : {};
+    const user = req.user._id;
+    const { tenant } = req.headers;
+    const { contextType, contextId = null } = req.query;
+    const query = { user, tenant, contextType, contextId };
     const update = {
-      ...req.body,
-      user: req.user._id,
-      tenant: req.headers.tenant,
+      contextData: req.body || {},
     };
 
     const draft = await Draft.findOneAndUpdate(query, update, {
