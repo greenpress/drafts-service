@@ -13,6 +13,6 @@ export default (app) => {
       verifyUser,
       getDraft,
     )
-    .post("/api/drafts", populateUser, verifyUser, setDraft)
-    .put("/api/drafts/:draftId", populateUser, verifyUser, setDraft);
+    .put("/api/drafts/", populateUser, verifyUser, setDraft);
+  // don't need draftId here, it's recieved from the request body
 };
