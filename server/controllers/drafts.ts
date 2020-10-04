@@ -10,14 +10,13 @@ export async function getDraftsList(req, res) {
   }
 }
 
-type GetDraftQuery = { _id: string; contextType?: string; user: string };
+type GetDraftQuery = { _id: string; contextType: string; user: string };
 
 export async function getDraft(req, res) {
   try {
     const { contextType, draftId } = req.params;
     const { _id: user } = req.user;
-    const query: GetDraftQuery = { _id: draftId, user };
-    if (contextType) query.contextType = contextType;
+    const query: GetDraftQuery = { _id: draftId, user, contextType };
     const draft = await Draft.findOne(query);
     if (!draft) throw new Error();
     res.status(200).json(draft).end();
