@@ -13,7 +13,7 @@ export default (app) => {
   app
     .get("/api/drafts", populateUser, verifyUser, getDraftsList)
     .get(
-      "/api/drafts/:contextType/:draftId",
+      "/api/drafts/:contextType/:contextId",
       populateUser,
       verifyUser,
       getDraft,
