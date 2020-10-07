@@ -1,4 +1,4 @@
-import Draft, { IDraft } from "../models/draft";
+import Draft from "../models/draft";
 
 export async function getDraftsList(req, res) {
   try {
