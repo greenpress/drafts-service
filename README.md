@@ -9,7 +9,6 @@
 - npm OR yarn
 - MongoDB
 - [Authentication-service](https://github.com/greenpress/authentication-service)
-- [Content-service](https://github.com/greenpress/content-service)
 
 ## Usage
 
