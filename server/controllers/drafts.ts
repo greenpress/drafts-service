@@ -13,13 +13,22 @@ export async function getDraftsList(req, res) {
   }
 }
 
-type GetDraftQuery = { contextId: string; contextType: string; user: string };
+type GetDraftQuery = {
+  contextId?: string;
+  contextType?: string;
+  user: string;
+  tenant: string;
+};
 
 export async function getDraft(req, res) {
   try {
-    const { contextType, contextId } = req.params;
-    const { _id: user } = req.user;
-    const query: GetDraftQuery = { contextId, user, contextType };
+    const query: GetDraftQuery = {
+      user: req.user._id,
+      tenant: req.headers.tenant,
+    };
+    const { contextType, contextId } = req.query;
+    if (contextType) query.contextType = contextType;
+    if (contextId) query.contextId = contextId;
     const draft = await Draft.findOne(query).lean();
     if (!draft) throw new Error();
     res.status(200).json(draft).end();

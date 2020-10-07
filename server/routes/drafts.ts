@@ -11,9 +11,9 @@ const { populateUser, verifyUser } = require(
 
 export default (app) => {
   app
-    .get("/api/drafts", populateUser, verifyUser, getDraftsList)
+    .get("/api/drafts/all", populateUser, verifyUser, getDraftsList)
     .get(
-      "/api/drafts/:contextType/:contextId",
+      "/api/drafts/",
       populateUser,
       verifyUser,
       getDraft,
