@@ -45,11 +45,9 @@ export async function setDraft(req, res) {
   try {
     const user = req.user._id;
     const { tenant } = req.headers;
-    const { contextType, contextId = null } = req.query;
+    const { contextType, contextId = null, contextData = {} } = req.body;
     const query = { user, tenant, contextType, contextId };
-    const update = {
-      contextData: req.body || {},
-    };
+    const update = { contextData };
 
     const draft = await Draft.findOneAndUpdate(query, update, {
       upsert: true,
