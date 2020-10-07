@@ -10,19 +10,12 @@ const { populateUser, verifyUser } = require(
 );
 
 export default (app) => {
+  app.use(populateUser);
+  app.use(verifyUser);
+
   app
-    .get("/api/drafts/all", populateUser, verifyUser, getDraftsList)
-    .get(
-      "/api/drafts",
-      populateUser,
-      verifyUser,
-      getDraft,
-    )
-    .put("/api/drafts", populateUser, verifyUser, setDraft)
-    .delete(
-      "/api/drafts",
-      populateUser,
-      verifyUser,
-      deleteDraft,
-    );
+    .get("/api/drafts/all", getDraftsList)
+    .get("/api/drafts", getDraft)
+    .put("/api/drafts", setDraft)
+    .delete("/api/drafts", deleteDraft);
 };
