@@ -4,7 +4,7 @@ export async function getDraftsList(req, res) {
   try {
     const drafts = await Draft.find({
       user: req.user._id,
-      tenant: req.headers.tenant
+      tenant: req.headers.tenant,
     });
     if (!drafts) throw new Error();
     res.status(200).json(drafts).end();
@@ -20,7 +20,7 @@ export async function getDraft(req, res) {
     const { contextType, contextId } = req.params;
     const { _id: user } = req.user;
     const query: GetDraftQuery = { contextId, user, contextType };
-    const draft = await Draft.findOne(query);
+    const draft = await Draft.findOne(query).lean();
     if (!draft) throw new Error();
     res.status(200).json(draft).end();
   } catch (err) {
