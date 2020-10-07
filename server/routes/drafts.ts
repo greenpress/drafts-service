@@ -13,14 +13,14 @@ export default (app) => {
   app
     .get("/api/drafts/all", populateUser, verifyUser, getDraftsList)
     .get(
-      "/api/drafts/",
+      "/api/drafts",
       populateUser,
       verifyUser,
       getDraft,
     )
-    .put("/api/drafts/", populateUser, verifyUser, setDraft)
+    .put("/api/drafts", populateUser, verifyUser, setDraft)
     .delete(
-      "/api/drafts/",
+      "/api/drafts",
       populateUser,
       verifyUser,
       deleteDraft,
