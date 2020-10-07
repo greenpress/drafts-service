@@ -1,0 +1,11 @@
+tmp/
+*.tmp
+*.bak
+*.swp
+logs
+*.log
+npm-debug.log*
+*.md
+node_modules
+.git/
+.idea
