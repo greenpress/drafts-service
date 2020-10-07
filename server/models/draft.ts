@@ -23,7 +23,10 @@ const DraftSchema = new mongoose.Schema<IDraft>({
   },
   contextId: {
     type: String,
-    required: false,
+    required: function () {
+      // @ts-ignore
+      return this.contextId != null && typeof this.contextId !== "string";
+    },
   },
   contextData: {
     type: mongoose.Schema.Types.Mixed,
