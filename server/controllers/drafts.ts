@@ -2,7 +2,10 @@ import Draft, { IDraft } from "../models/draft";
 
 export async function getDraftsList(req, res) {
   try {
-    const drafts = await Draft.find();
+    const drafts = await Draft.find({
+      user: req.user._id,
+      tenant: req.headers.tenant
+    });
     if (!drafts) throw new Error();
     res.status(200).json(drafts).end();
   } catch (err) {
