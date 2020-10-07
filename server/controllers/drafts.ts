@@ -67,9 +67,10 @@ export async function setDraft(req, res) {
 export async function deleteDraft(req, res) {
   try {
     const { contextType, contextId } = req.params;
+    const { tenant } = req.headers;
     const options = { useFindAndModify: true };
     const deletedDraft = await Draft.findOne(
-      { contextType, contextId },
+      { contextType, contextId, tenant },
       options,
     );
     deletedDraft?.remove();
