@@ -47,7 +47,7 @@ export async function setDraft(req, res) {
       useFindAndModify: true,
       new: true,
       setDefaultsOnInsert: true,
-    });
+    }).lean();
 
     res.status(200).json(draft).end();
   } catch (err) {
