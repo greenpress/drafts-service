@@ -4,7 +4,7 @@ export interface IDraft extends Document {
   user: string;
   tenant: string;
   contextType: string;
-  contextId: string | undefined;
+  contextId: string | null;
   contextData: any;
 }
 
