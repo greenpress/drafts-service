@@ -20,7 +20,7 @@ export default (app) => {
     )
     .put("/api/drafts/", populateUser, verifyUser, setDraft)
     .delete(
-      "/api/drafts/:contextType/:contextId",
+      "/api/drafts/",
       populateUser,
       verifyUser,
       deleteDraft,
