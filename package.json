@@ -6,6 +6,9 @@
   "bin": {
     "greenpress-drafts": "dist/index.js"
   },
+  "publishConfig": {
+	"access": "public"
+  },
   "scripts": {
     "prepublish": "tsc",
     "postinstall": "tsc",
