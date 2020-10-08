@@ -1,5 +1,5 @@
 {
-  "name": "drafts-service",
+  "name": "@greenpress/drafts",
   "version": "1.0.0",
   "description": "drafts service for the greenpress api",
   "main": "dist/index.js",

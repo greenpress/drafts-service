@@ -2,7 +2,7 @@
 
 ## Main Features
 - ES6
-- manage post drafts
+- manage dynamic drafts
 
 ## Dependencies
 - Node.js
