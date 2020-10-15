@@ -1,17 +1,17 @@
 {
   "name": "@greenpress/drafts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "drafts service for the greenpress api",
   "main": "dist/index.js",
   "bin": {
     "greenpress-drafts": "dist/index.js"
   },
   "publishConfig": {
-	"access": "public"
+    "access": "public"
   },
   "scripts": {
     "prepublish": "tsc",
-    "postinstall": "tsc",
+    "build": "tsc",
     "start": "node --use_strict dist/index.js"
   },
   "repository": {
