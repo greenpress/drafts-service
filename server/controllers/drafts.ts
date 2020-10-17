@@ -1,79 +1,56 @@
-import Draft from "../models/draft";
+import draftDao from '../dao/drafts'
 
 export async function getDraftsList(req, res) {
-  try {
-    const drafts = await Draft.find({
-      user: req.user._id,
-      tenant: req.headers.tenant,
-    });
-    if (!drafts) throw new Error();
-    res.status(200).json(drafts).end();
-  } catch (err) {
-    res.status(500).json({ message: "error while finding drafts" }).end();
-  }
+	try {
+		const drafts = await draftDao.getAll(req.headers.tenant, req.user._id)
+		if (!drafts) throw new Error()
+		res.status(200).json(drafts).end()
+	} catch (err) {
+		res.status(500).json({ message: 'error while finding drafts' }).end()
+	}
 }
-
-type GetDraftQuery = {
-  contextId: string | null;
-  contextType?: string;
-  user: string;
-  tenant: string;
-};
 
 export async function getDraft(req, res) {
-  try {
-    const { contextType, contextId } = req.query;
-    const query: GetDraftQuery = {
-      user: req.user._id,
-      tenant: req.headers.tenant,
-      contextId: contextId || null,
-    };
-    if (contextType) query.contextType = contextType;
-    const draft = await Draft.findOne(query).lean();
-    if (!draft) throw new Error();
-    res.status(200).json(draft).end();
-  } catch (err) {
-    res.status(404).json({ message: "draft not found" }).end();
-  }
+	try {
+		const { contextType, contextId } = req.query
+		const draft = await draftDao.getDraft({
+			user: req.user._id,
+			tenant: req.headers.tenant,
+			contextId: contextId || null,
+			contextType
+		})
+		if (!draft) throw new Error()
+		res.status(200).json(draft).end()
+	} catch (err) {
+		res.status(404).json({ message: 'draft not found' }).end()
+	}
 }
 
-/** 
+/**
  * for both creating and updating a draft, just like a Map data type
  * the frontend doesn't care if the draft exists or not, it just passes the contextData.
-*/
+ */
 export async function setDraft(req, res) {
-  try {
-    const user = req.user._id;
-    const { tenant } = req.headers;
-    const { contextType, contextId = null, contextData = {} } = req.body;
-    const query = { user, tenant, contextType, contextId };
-    const update = { contextData };
+	try {
+		const user = req.user._id
+		const { tenant } = req.headers
+		const { contextType, contextId = null, contextData = {} } = req.body
 
-    const draft = await Draft.findOneAndUpdate(query, update, {
-      upsert: true,
-      useFindAndModify: true,
-      new: true,
-      setDefaultsOnInsert: true,
-    }).lean();
+		const draft = await draftDao.setDraft({ user, tenant, contextType, contextId }, contextData)
 
-    res.status(200).json(draft).end();
-  } catch (err) {
-    res.status(500).json({ message: "error mutating draft" }).end();
-  }
+		res.status(200).json(draft).end()
+	} catch (err) {
+		res.status(500).json({ message: 'error mutating draft' }).end()
+	}
 }
 
 export async function deleteDraft(req, res) {
-  try {
-    const { contextType, contextId = null } = req.query;
-    const { tenant } = req.headers;
-    const options = { useFindAndModify: true };
-    const deletedDraft = await Draft.findOne(
-      { contextType, contextId, tenant },
-      options,
-    );
-    deletedDraft?.remove();
-    res.status(200).json(deletedDraft).end();
-  } catch (err) {
-    res.status(500).json({ message: "couldn't delete draft" });
-  }
+	try {
+		const { contextType, contextId = null } = req.query
+		const { tenant } = req.headers
+		await draftDao.removeDraft({ contextType, contextId, tenant, user: req.user._id })
+		res.status(200).json({ success: true }).end()
+	} catch (err) {
+		res.status(500).json({ message: 'couldn\'t delete draft' })
+	}
 }

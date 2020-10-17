@@ -1,7 +1,4 @@
-import { mongoUri, port, ip } from "./config";
-
-// connect to the database and load models
-require("./server/models").connect(mongoUri);
+import { port, ip } from "./config";
 
 require("./server/routes");
 

@@ -1,21 +1,18 @@
+import { populateUser, verifyUser } from '@greenpress/api-kit/user-middlewares'
 import {
-  deleteDraft,
-  getDraft,
-  getDraftsList,
-  setDraft,
-} from "../controllers/drafts";
-// I'm using require because those functions have no type decleations
-const { populateUser, verifyUser } = require(
-  "@greenpress/api-kit/user-middlewares",
-);
+	deleteDraft,
+	getDraft,
+	getDraftsList,
+	setDraft
+} from '../controllers/drafts'
 
 export default (app) => {
-  app.use(populateUser);
-  app.use(verifyUser);
+	app.use(populateUser)
+	app.use(verifyUser)
 
-  app
-    .get("/api/drafts/all", getDraftsList)
-    .get("/api/drafts", getDraft)
-    .put("/api/drafts", setDraft)
-    .delete("/api/drafts", deleteDraft);
+	app
+		.get('/api/drafts/all', getDraftsList)
+		.get('/api/drafts', getDraft)
+		.put('/api/drafts', setDraft)
+		.delete('/api/drafts', deleteDraft)
 };
