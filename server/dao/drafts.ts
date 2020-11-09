@@ -1,5 +1,6 @@
 import { mongoUri } from '../../config'
 import { GetDraftQuery } from './types/get-draft-query'
+import { SetDraftContexts } from './types/set-draft-contexts'
 
 class DraftDao {
 	private model
@@ -19,8 +20,8 @@ class DraftDao {
 		return this.model.getDraft(query)
 	}
 
-	setDraft(query: GetDraftQuery, contextData: any) {
-		return this.model.setDraft(query, contextData)
+	setDraft(query: GetDraftQuery, contexts: SetDraftContexts) {
+		return this.model.setDraft(query, contexts)
 	}
 
 	removeDraft(query: GetDraftQuery) {

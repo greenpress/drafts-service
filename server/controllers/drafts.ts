@@ -34,9 +34,14 @@ export async function setDraft(req, res) {
 	try {
 		const user = req.user._id
 		const { tenant } = req.headers
-		const { contextType, contextId = null, contextData = {} } = req.body
+		const { contextType, contextId = null, contextData = {}, contextDisplayName = '', contextRouteParams = {} } = req.body
 
-		const draft = await draftDao.setDraft({ user, tenant, contextType, contextId }, contextData)
+		const draft = await draftDao.setDraft({
+			user,
+			tenant,
+			contextType,
+			contextId
+		}, { contextData, contextDisplayName, contextRouteParams })
 
 		res.status(200).json(draft).end()
 	} catch (err) {

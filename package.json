@@ -1,6 +1,6 @@
 {
   "name": "@greenpress/drafts",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "drafts service for the greenpress api",
   "main": "dist/index.js",
   "bin": {

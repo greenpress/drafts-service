@@ -17,6 +17,11 @@ const DraftSchema = new mongoose.Schema<IDraft>({
     type: String,
     required: true,
   },
+	contextDisplayName: String,
+	contextRouteParams: {
+		type: mongoose.Schema.Types.Mixed,
+		default: {},
+	},
   contextType: {
     type: String,
     required: true,
