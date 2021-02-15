@@ -1,6 +1,6 @@
 {
   "name": "@greenpress/drafts",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "drafts service for the greenpress api",
   "main": "dist/index.js",
   "bin": {
@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/greenpress/drafts-service#readme",
   "dependencies": {
-    "@greenpress/api-kit": "0.1.0",
+    "@greenpress/api-kit": "^0.1.1",
     "mongoose": "^5.10.5"
   },
   "devDependencies": {
